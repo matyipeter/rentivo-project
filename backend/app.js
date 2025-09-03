@@ -31,7 +31,7 @@ const suggestionLimiter = rateLimit({
     message: { error: 'Too many submissions, try again later.' }
 });
 
-app.post('/api/submit-suggestion',  suggestionLimiter, async (req, res) => {
+app.post('/api/suggestions',  suggestionLimiter, async (req, res) => {
     
     let { name, email, suggestion } = req.body;
 

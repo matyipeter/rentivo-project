@@ -31,7 +31,7 @@ export default function Footer() {
                 e.preventDefault();
 
                 const email = e.target.elements.email.value;
-                fetch('http://localhost:9000/api/subscribe', {
+                fetch('api/subscribe', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',

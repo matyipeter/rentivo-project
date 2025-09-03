@@ -15,18 +15,28 @@ export default function UnderDevelopmentSection() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    fetch('http://localhost:9000/api/submit-suggestion', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-
-    setSubmitted(true);
-    setFormData({ name: '', email: '', suggestion: '' });
+  
+    try {
+      const res = await fetch('api/suggestions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
+  
+      setSubmitted(true);
+      setFormData({ name: '', email: '', suggestion: '' });
+    } catch (err) {
+      console.error("Fetch failed:", err);
+      alert("Submission failed. Check console for details.");
+    }
   };
+  
 
   return (
     <section id="help" className="bg-[#f5f5f5] text-gray-900 py-20">
