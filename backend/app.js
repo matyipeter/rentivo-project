@@ -11,7 +11,7 @@ const db = require('./db');
 const port = process.env.PORT || 9000;
 
 
-
+app.set('trust proxy', 1);
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
